@@ -1,0 +1,47 @@
+The Julian Day Count is a uniform count of days from a remote epoch in the past (-4712 January 1, 12 hours Greenwich Mean Time (Julian proleptic Calendar) = 4713 BCE January 1, 12 hours GMT (Julian proleptic Calendar) = 4714 BCE November 24, 12 hours GMT (Gregorian proleptic Calendar)). At this instant, the Julian Day Number is 0. It is convenient for astronomers to use since it is not necessary to worry about odd numbers of days in a month, leap years, etc. Once you have the Julian Day Number of a particular date in history, it is easy to calculate time elapsed between it and any other Julian Day Number.
+
+The Julian Day Count has nothing to do with the Julian Calendar introduced by Julius Caesar. It is named for Julius Scaliger, the father of Josephus Justus Scaliger, who invented the concept. It can also be thought of as a logical follow-on to the old Egyptian civil calendar, which also used years of constant lengths.
+
+Scaliger chose the particular date in the remote past because it was before recorded history and because in that year, three important cycles coincided with their first year of the cycle: The 19-year Metonic Cycle, the 15-year Indiction Cycle (a Roman Taxation Cycle) and the 28-year Solar Cycle (the length of time for the old Julian Calendar to repeat exactly).
+------
+
+It is easy (with your calculator) to calculate the Julian Day Number of any date given on the Gregorian Calendar. The Julian Day Number so calculated will be for 0 hours, GMT, on that date. Here's how to do it:
+
+Express the date as Y M D, where Y is the year, M is the month number (Jan = 1, Feb = 2, etc.), and D is the day in the month. Dropping the fractional part of all results of all multiplications and divisions, let
+
+If the month is January or February, subtract 1 from the year to get a new Y, and add 12 to the month to get a new M. (Thus, we are thinking of January and February as being the 13th and 14th month of the previous year).
+
+IF Y < 3 THEN
+    Y = Y -1
+    M = M + 12
+ENDIF
+
+A = Y/100
+B = A/4
+C = 2-A+B
+E = 365.25x(Y+4716)
+F = 30.6001x(M+1)
+JD= C+D+E+F-1524.5
+----
+
+Source: https://quasar.as.utexas.edu/BillInfo/JulianDatesG.html
+Y = 2000
+M = 3
+D = 1
+
+A = 20
+B = 5
+C = 2-20+5 = -13
+E = 2453019
+F = 122.4004 = 122
+JD = -13 + 1 + 2453019 + 122 - 1524.5 = 2451604.5 = 2400000.5 + 51604.0 = 2451604
+
+IF Y < 3 THEN
+    Y = Y -1
+    M = M + 12
+ENDIF
+
+A = 2-(Y/100)+(Y/400)
+B = 365.25x(Y+4716)
+C = 30.6001x(M+1)
+JD= A+D+B+C-1524.5
