@@ -1,4 +1,5 @@
 # Hijri
+
 Hijri Date Converter
 1st Muharram 1 A.H. = 16th July 622 Julian = 19th July 622 Gregorian
 
@@ -14,7 +15,8 @@ Hijri Date Converter
   print(today.daysInMonth); // 29 days
   print(today.format("MMMM dd yyyy")); //Dhu Al-Hijjah 23 1444
 ```
-```
+
+````
   ##### From Gregorian to Hijri
   ```dart
   var hdate = HijriDate.fromDate(DateTime(2018, 11, 12));
@@ -22,8 +24,10 @@ Hijri Date Converter
   print(hdate.shortMonthName); //Rab1
   print(hdate.longMonthName); //Rabi' Al-Awwal
   print(hdate.lengthOfMonth); // 30
-```
+````
+
 ##### From Hijri to Gregorian
+
 ```dart
   //From Hijri to Gregorian
   var gdate = HijriDate(27, 7, 1415);
@@ -31,6 +35,7 @@ Hijri Date Converter
 ```
 
 ##### Format
+
 ```dart
   var today = HijriDate.now();
   print(today.fullDate); //Wednesday, Dhu Al-Hijjah 23, 1444 A.H
@@ -38,9 +43,12 @@ Hijri Date Converter
 ```
 
 ##### Month Calendar
+
 ```dart
   var today = HijriDate.now();
   today.printCalendar();
+```
+
 ```
   Dhu Al-Hijjah 1444 A.H
 Ahd Ith Zul Arb Kha Jum Sab
@@ -49,6 +57,7 @@ Ahd Ith Zul Arb Kha Jum Sab
  13  14  15  16  17  18  20
  20  21  22  23  24  25  27
  27  28  29
+```
 
 ## Additional information
 

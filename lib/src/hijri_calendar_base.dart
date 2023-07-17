@@ -139,19 +139,15 @@ class HijriDate {
       }
     }
 
-    //=========== Day Name =============//
-    // Friday
+    // Day Name
     if (newFormat.contains("DDDD")) {
       newFormat =
           newFormat.replaceFirst("DDDD", "${wdNames[weekDay]!['long']}");
-
-      // Fri
     } else if (newFormat.contains("DD")) {
       newFormat = newFormat.replaceFirst("DD", "${wdNames[weekDay]!['short']}");
     }
 
-    //============== Month ========================//
-    // 1
+    // Month
     if (newFormat.contains("mm")) {
       newFormat = newFormat.replaceFirst("mm", monthString.padLeft(2, '0'));
     } else {
@@ -167,7 +163,7 @@ class HijriDate {
       }
     }
 
-    //================= Year ========================//
+    // Year
     if (newFormat.contains("yyyy")) {
       newFormat = newFormat.replaceFirst("yyyy", yearString);
     } else {
@@ -208,8 +204,7 @@ class HijriDate {
       for (int c = 0; c < 7; c++) {
         int i = 7 * r + c;
         if (cal[i] != 0) {
-          String dt = cal[i].toString().padLeft(
-              2, '0'); //cal[i] < 10 ? '0${cal[i]}' : cal[i].toString();
+          String dt = cal[i].toString().padLeft(2, '0');
           if (cal[i] == day) {
             // highlight the current date
             stdout.write(' \x1B[7m$dt\x1B[0m ');
