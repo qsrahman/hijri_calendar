@@ -21,7 +21,7 @@ class HijriDate {
   HijriDate.fromDate(DateTime dt)
       : this.fromGregorian(dt.day, dt.month, dt.year);
   HijriDate.fromGregorian(int d, int m, int y)
-      : this.fromJdn(HijriDate.gregornToJdn(d, m, y));
+      : this.fromJdn(HijriDate.gregorianToJdn(d, m, y));
   HijriDate.fromJdn(num jdn) {
     weekDay = (jdn + 1).floor() % 7 + 1; // 1 or 1.5 ?
 
@@ -64,23 +64,23 @@ class HijriDate {
     // return (((11 * year) + 14) % 30) < 11;
   }
 
-  static num gregornToJdn(int d, int m, int y) {
-    num jdn = (gregornEpoch - 1) +
+  static num gregorianToJdn(int d, int m, int y) {
+    num jdn = (gregorianEpoch - 1) +
         (365 * (y - 1)) + // days in previous years ignoring leap days
         ((y - 1) ~/ 4) + // Julian leap days before this year...
         (-((y - 1) ~/ 100)) + // ...minus prior century years...
         ((y - 1) ~/ 400) + // ...plus prior years divisible by 400
         ((((367 * m) - 362) ~/ 12) + // days this year
-            ((m <= 2) ? 0 : (isGregornLeapYear(y) ? -1 : -2)) +
+            ((m <= 2) ? 0 : (isGregorianLeapYear(y) ? -1 : -2)) +
             d);
 
-    // print('jdn from gregornToJdn() = $jdn');
+    // print('jdn from gregorianToJdn() = $jdn');
     return jdn;
   }
 
   static ({int day, int month, int year}) jdnToGregorian(num jdn) {
     num wjd = (jdn - 0.5).floor() + 0.5;
-    num depoch = wjd - gregornEpoch;
+    num depoch = wjd - gregorianEpoch;
     int quadricent = depoch ~/ 146097;
     num dqc = depoch % 146097;
     int cent = dqc ~/ 36524;
@@ -94,26 +94,27 @@ class HijriDate {
       y++;
     }
 
-    num yd = wjd - gregornToJdn(1, 1, y);
-    int leapadj =
-        ((wjd < gregornToJdn(1, 3, y)) ? 0 : (isGregornLeapYear(y) ? 1 : 2));
+    num yd = wjd - gregorianToJdn(1, 1, y);
+    int leapadj = ((wjd < gregorianToJdn(1, 3, y))
+        ? 0
+        : (isGregorianLeapYear(y) ? 1 : 2));
     int m = ((((yd + leapadj) * 12) + 373) ~/ 367);
-    int d = (wjd - gregornToJdn(1, m, y)).floor() + 1;
+    int d = (wjd - gregorianToJdn(1, m, y)).floor() + 1;
 
     return (day: d, month: m, year: y);
   }
 
-  static bool isGregornLeapYear(int y) {
+  static bool isGregorianLeapYear(int y) {
     // return ((y % 4) == 0) && (!(((y % 100) == 0) && ((y % 400) != 0)));
     return ((y >= 1582)
         ? ((y % 4 == 0 && y % 100 != 0) || (y % 400 == 0))
         : (y % 4 == 0));
   }
 
-  static int dayInGregornMonth(int m, int y) {
+  static int daysInGregorianMonth(int m, int y) {
     switch (m) {
       case 2:
-        return isGregornLeapYear(y) ? 29 : 28;
+        return isGregorianLeapYear(y) ? 29 : 28;
       case 4:
       case 6:
       case 9:
@@ -177,7 +178,7 @@ class HijriDate {
     return newFormat;
   }
 
-  void printCalendar() {
+  void calendar() {
     List<int> cal = List.filled(42, 0); // 6x7
 
     int wkDay = HijriDate(1, month, year).weekDay;

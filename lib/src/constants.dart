@@ -35,6 +35,5 @@ const Map<int, Map<String, String>> wdNames = {
   6: {'short': 'Sab', 'long': 'As-Sabt'},
 };
 
-
 const num hijriEpoch = 1948439.5;
-const num gregornEpoch = 1721425.5;
+const num gregorianEpoch = 1721425.5;

@@ -3,7 +3,7 @@ import 'package:hijri_calendar/hijri_calendar.dart';
 void main() {
   HijriDate today = HijriDate.now();
 
-  today.printCalendar();
+  today.calendar();
 
   // print('Today hijri date: $today');
   print('Today hijri date: ${today.fullDate}');

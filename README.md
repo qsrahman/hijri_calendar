@@ -46,7 +46,7 @@ Hijri Date Converter
 
 ```dart
   var today = HijriDate.now();
-  today.printCalendar();
+  today.calendar();
 ```
 
 ```
